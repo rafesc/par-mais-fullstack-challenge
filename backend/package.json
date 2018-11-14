@@ -1,0 +1,22 @@
+{
+  "name": "par-mais-fullstack-challenge-backend",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "nodemon $NODE_DEBUG_OPTION index.js"
+  },
+  "keywords": [
+    "swagger"
+  ],
+  "license": "Unlicense",
+  "private": true,
+  "dependencies": {
+    "connect": "^3.2.0",
+    "cors": "^2.8.5",
+    "js-yaml": "^3.3.0",
+    "nodemon": "^1.18.6",
+    "swagger-client": "^3.8.22",
+    "swagger-tools": "^0.10.4"
+  }
+}

@@ -1,0 +1,21 @@
+{
+  "name": "par-mais-fullstack-challenge",
+  "version": "1.0.0",
+  "description": "",
+  "scripts": {
+    "setup": "npm install && cd backend && npm install && cd ../frontend && npm install",
+    "frontend": "cd frontend && npm start",
+    "backend": "cd backend && npm start",
+    "start": "concurrently --kill-others-on-fail \"npm run frontend\" \"npm run backend\" \"npm run proxy\" \"sleep 10 && opn http://localhost:1815\"",
+    "proxy": "nodemon index"
+  },
+  "license": "Unlicense",
+  "private": true,
+  "dependencies": {
+    "concurrently": "^4.0.1",
+    "express": "latest",
+    "express-http-proxy": "^1.5.0",
+    "nodemon": "^1.18.6",
+    "opn-cli": "^4.0.0"
+  }
+}

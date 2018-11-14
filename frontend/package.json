@@ -1,0 +1,32 @@
+{
+  "name": "par-mais-fullstack-challenge-frontend",
+  "version": "1.0.0",
+  "description": "",
+  "main": "src/index.js",
+  "dependencies": {
+    "@parmais/par-ui-material": "1.1.13",
+    "swagger-client": "^3.8.22"
+  },
+  "devDependencies": {
+    "react": "16.6.1",
+    "react-dom": "16.6.1",
+    "react-router-dom": "4.3.1",
+    "react-scripts": "2.1.1",
+    "swagger-ui": "3.19.5"
+  },
+  "license": "Unlicense",
+  "private": true,
+  "scripts": {
+    "start": "PORT=3000 BROWSER=none react-scripts start",
+    "build": "react-scripts build",
+    "test": "react-scripts test --env=jsdom",
+    "eject": "react-scripts eject"
+  },
+  "browserslist": [
+    ">0.2%",
+    "not dead",
+    "not ie <= 11",
+    "not op_mini all"
+  ],
+  "keywords": []
+}
