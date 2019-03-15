@@ -5,14 +5,17 @@
   "main": "src/index.js",
   "dependencies": {
     "@parmais/par-ui-material": "1.1.13",
+    "redux": "^4.0.1",
+    "redux-promise": "^0.6.0",
+    "redux-thunk": "^2.3.0",
     "swagger-client": "^3.8.22"
   },
   "devDependencies": {
     "react": "16.6.1",
     "react-dom": "16.6.1",
     "react-router-dom": "4.3.1",
-    "react-scripts": "2.1.1",
-    "swagger-ui": "3.19.5"
+    "react-scripts": "^2.1.8",
+    "swagger-ui": "^3.21.0"
   },
   "license": "Unlicense",
   "private": true,
