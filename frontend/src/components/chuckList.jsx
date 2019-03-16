@@ -1,18 +1,14 @@
 import React from 'react'
 import { Grid, Paper, Typography } from '@parmais/par-ui-material'
+import swagger from '../api'
 
-import { getRandom } from '../services/factsService'
-
-/*
-  TODO fetch data using the swagger API methods described in /docs
-  hint:
-  import swagger from '../api'
-  swagger.then((client) => client.apis.facts.randomFact().then(console.log))
-*/
+// import { getRandom } from '../services/factsService'
 
 export default () => {
 
-  getRandom()
+  swagger
+    .then((client) => client.apis.facts.randomFact())
+    .then(console.log)
 
   return (
     <div style={{ padding: '100px' }}>
