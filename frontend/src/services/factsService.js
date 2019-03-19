@@ -1,16 +1,17 @@
-import http from './http'
+import swagger from '../api'
 
-let api = {
-  baseUrl: 'http://localhost:1815/api/jokes',
-  endpoints: {
-    CATEGORIES: '/categories',
-    RANDOM: '/random',
-    SEARCH: '/search'
-  }
+function client () {
+  return swagger.then((_client) => _client.apis.facts)
 }
 
-let _http = http(api.baseUrl)
+export function getRandomFact (category = '') {
+  return client().then((_client) => _client.randomFact({category}))
+}
 
-export function getRandom () {
-  return _http.get(api.endpoints.RANDOM)
+export function getSearchResults (query = '') {
+  return client().then((_client) => _client.search({query}))
+}
+
+export function getCategories () {
+  return client().then((_client) => _client.listCategories())
 }
