@@ -3,11 +3,10 @@
  * Refer to the API definitions in the provided swagger file for response and request compliance.
  **/
 
-const { anyPass, includes, ifElse, isEmpty, lt, pipe, prop, values } = require('ramda')
-const Categories = require('../constants/categories')
+const { ifElse, pipe, prop } = require('ramda')
 const norrisClient = require('../api')
 
-const EMPTY_STRING = ''
+const {_greaterThan, _parseCategory, _mapToEndpoints} = require('./helpers')
 
 /**
  * Retrieve a list of available categories.
@@ -15,7 +14,7 @@ const EMPTY_STRING = ''
  * returns List
  **/
 function listCategories () {
-  return norrisClient.then(mapToEndpoints()).then(_listCategories).then(prop('body'))
+  return norrisClient.then(_mapToEndpoints()).then(_listCategories).then(prop('body'))
 }
 
 /**
@@ -26,9 +25,9 @@ function listCategories () {
  * returns Fact
  **/
 function randomFact (category = '') {
-  let _category = parseCategory(category)
+  let _category = _parseCategory(category)
 
-  return norrisClient.then(mapToEndpoints()).then(pipe(parseCategory, _randomFact)(_category)).then(prop('body'))
+  return norrisClient.then(_mapToEndpoints()).then(pipe(_parseCategory, _randomFact)(_category)).then(prop('body'))
 }
 
 /**
@@ -40,39 +39,10 @@ function randomFact (category = '') {
  **/
 function search (query = '') {
   return ifElse(
-    greaterThan(2),
-    (_query) => norrisClient.then(mapToEndpoints()).then(_search(_query)).then(prop('body')),
+    _greaterThan(2),
+    (_query) => norrisClient.then(_mapToEndpoints()).then(_search(_query)).then(prop('body')),
     () => Promise.resolve(emptyQueryResponse)
   )(query)
-}
-
-function mapToEndpoints () {
-  return pipe(
-    prop('apis'),
-    prop('facts')
-  )
-}
-
-function parseCategory (category) {
-  return ifElse(
-    isValidCategoryValue(category),
-    () => category,
-    () => EMPTY_STRING
-  )(values(Categories))
-}
-
-function isValidCategoryValue (category) {
-  return anyPass([
-    () => isEmpty(category),
-    includes(category)
-  ])
-}
-
-function greaterThan (length) {
-  return pipe(
-    prop('length'),
-    lt(length)
-  )
 }
 
 const emptyQueryResponse = Object.freeze({ total: 0, result: [] })
@@ -86,10 +56,5 @@ const _search = (query) => (endpoints) => endpoints.search({ query })
 module.exports = {
   listCategories,
   randomFact,
-  search,
-  /* exposing utility functions for testing */
-  _isValidCategoryValue: isValidCategoryValue,
-  _mapToEndpoints: mapToEndpoints,
-  _parseCategory: parseCategory,
-  _greaterThan: greaterThan
+  search
 }
